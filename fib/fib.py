@@ -40,12 +40,21 @@ cache = {}
 
 def fib_dynam(num):
     global cache
-    if num < 2:
-        return 1
+    if num <= 1:
+        return num
     elif num in cache:
         return cache[num]
     else:
         cache[num] = fib_dynam(num - 1) + fib_dynam(num - 2)
+        return cache[num]
 
 
-print(fib_dynam(10))
+# still slower than iterative?
+s = timeit("fib_dynam(10)", globals=globals(), number=1)
+print(f"fib_dynam(10) took {s} seconds")
+
+s = timeit("fib_dynam(30)", globals=globals(), number=1)
+print(f"fib_dynam(30) took {s} seconds")
+
+s = timeit("fib_dynam(1000)", globals=globals(), number=1)
+print(f"fib_dynam(1000) took {s} seconds")
